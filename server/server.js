@@ -26,6 +26,19 @@ app.get('/get-clicks', (req, res) => {
   res.send({totalClicks});
 });
 
+app.post('/add-username', (req,res) => {
+  req.session.username = req.session.username || '';
+  console.log(req.body);
+  req.session.username = req.body.username;
+  res.sendStatus(200);
+});
+
+app.get('/get-username', (req,res) => {
+  req.session.username = req.session && req.session.username || '';
+  const {username} = req.session;
+  res.send({username});
+});
+
 // App Set //
 const PORT = process.env.PORT || 5000;
 
